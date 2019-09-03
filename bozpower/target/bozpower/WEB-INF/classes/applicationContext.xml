@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd	
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 自动扫描包 -->
+	<context:component-scan
+		base-package="com.app.bzpower.service">
+		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/> -->
+	</context:component-scan>
+
+	<!-- 加载外部资源 -->
+	<context:property-placeholder
+		location="classpath:generator.properties" />
+
+	<!-- 配置数据源 -->
+	<!-- destroy-method的作用为： 数据库不适用的时候，把连接放到连接池中，供下次使用 -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}" />
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialPoolSize" value="5" />
+		<property name="maxPoolSize" value="20" />
+	</bean>
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 指定mybatis的全局配置文件 -->
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<!-- 指定mybatis 的mapper文件 -->
+		<property name="mapperLocations"
+			value="classpath:com/app/bzpower/mapper/*.xml" />
+	</bean>
+
+	<!-- 扫描mybatis的mapper接口 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 指定要自动扫描接口的基础包，实现接口  -->
+		<property name="basePackage" value="com.app.bzpower.dao" />
+
+	</bean>
+
+
+</beans>

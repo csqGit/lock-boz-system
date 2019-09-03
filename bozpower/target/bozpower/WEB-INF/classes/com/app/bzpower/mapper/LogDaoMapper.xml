@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.bzpower.dao.LogDao">
+
+	<resultMap type="com.app.bzpower.entity.Log"
+		id="logMap">
+		<result column="id" property="id" />
+		<result column="company" property="company" />
+		<result column="lockName" property="lockName" />
+		<result column="transformersub" property="transformersub" />
+		<result column="mac" property="mac" />
+		<result column="did" property="did" />
+		<result column="requestTime" property="requestTime" />
+		<result column="openTime" property="openTime" />
+		<result column="closeTime" property="closeTime" />
+		<result column="actionD" property="actionD" />
+		<result column="on_off" property="onOff" />
+		<result column="status" property="status" />
+		<result column="examinePerson" property="examinePerson" />
+	</resultMap>
+	
+	<select id="getLog" resultType="com.app.bzpower.entity.Log">
+		select * from log where (status = #{status} or actionD = #{actionD}) 
+		 and requestTime  like "%"#{requestTime}"%" order by requestTime desc
+	</select>
+	
+	<select id="selectLogList"  resultType="com.app.bzpower.entity.Log">
+		select * from log order by requestTime desc
+		<if test="resultPage > 0">
+			limit #{page}, #{resultPage}
+		</if>
+		<!-- order by requestTime -->
+	</select>
+
+	
+	<select id="getLogById" parameterType="java.lang.Integer" resultType="com.app.bzpower.entity.Log">
+		select * from log where id = #{id}
+	</select>
+	
+	<select id="selectLogByRequestTime" parameterType="java.lang.String" resultType="com.app.bzpower.entity.Log">
+		select * from log where requestTime = #{requestTime}
+	</select>
+	
+	<select id="selectLogOpenTime" parameterType="java.lang.String" resultType="com.app.bzpower.entity.Log">
+		select * from log where openTime = #{openTime}
+	</select>
+	
+	<select id="selectLogByCloseTime" parameterType="java.lang.String" resultType="com.app.bzpower.entity.Log">
+		select * from log where closeTime = #{closeTime} and did = #{did}
+	</select>
+	
+	
+	<select id="selectLogCount" resultType="java.lang.Integer">
+		select count(*) as count from log  
+	</select>
+	
+	<insert id="insertUserRequestOpenLock">
+		insert into log(company, lockName,transformersub, did, mac, requestTime,closeTime, on_off, actionD, status)
+					values (#{company}, #{lockName},#{transformersub}, #{did}, #{mac},#{requestTime}, #{closeTime}, #{onOff}, #{actionD}, #{status})
+	</insert>
+
+
+	<update id="updateOpenLockInfo">
+			update log set openTime= #{openTime},on_off = #{onOff},actionD=#{actionD},
+			status=#{status}, examinePerson = #{examinePerson} where id=#{id}
+	</update>
+	
+	<delete id="deleteLog" parameterType="java.lang.Integer">
+		delete from log where id = #{id}
+	</delete>
+
+
+
+</mapper>

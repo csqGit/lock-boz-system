@@ -1,0 +1,114 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	width: 100%;
+	background: #00868B;
+	text-align: center;
+	line-height: 150px;
+	font-size: 50px;
+	letter-spacing: 3px;
+	color: white;
+	font-family: "Times New Roman", Times, serif;
+	font-weight: 800;
+}
+
+#main {
+	width: 100%;
+	background: #008B8B
+}
+
+#mainPanel {
+	position: relative;
+	margin: 0 auto;;
+	background: white;
+}
+
+
+#mainPanel {
+	position: relative;
+	margin: 0 auto;;
+	background: white;
+}
+
+#mainTitle {
+	width: 100%;
+	height: 65px;
+	line-height: 65px;
+	text-align: center;
+	letter-spacing: 2px;
+	color: #008B8B;
+	font-size: 18px;
+}
+
+#mainTitle span {
+	color: gray;
+	margin-left: 10px;
+	font-size: 13px;
+}
+
+.layui-form-item {
+	width: 90%;
+}
+
+.layui-inline {
+	width: 100%;
+}
+
+.layui-form-item .layui-input-inline {
+	width: 142px
+}
+
+#verificationCode {
+	background: rgb(234, 234, 234);
+	height: 38px;
+	width: 140px;
+	margin-left: 10px;
+	text-align: center;
+	cursor: pointer;
+	line-height: 38px;
+	font-size: 20px;
+	letter-spacing: 8px;
+	line-height: 38px
+}
+
+.layui-form-item .layui-input-inline {
+	margin-right: 0;
+}
+
+.layui-btn {
+	width: 90%;
+	margin-left: 40px;
+}
+
+.rememberMe, .forgetPass {
+	font-size: 13px;
+	color: gray;
+	cursor: pointer;
+}
+
+.rememberMe {
+	float: left;
+	margin-left: 50px;
+}
+
+.forgetPass {
+	float: right;
+	margin-right: 0;
+}
+
+#error {
+	margin-top: 5px;
+	font-size: 13px;
+	text-align: center;
+}
+
+#footer {
+	text-align: center;
+	color: white;
+	letter-spacing: 2px;
+	font-size: 15px;
+	margin-top: -10px;
+}

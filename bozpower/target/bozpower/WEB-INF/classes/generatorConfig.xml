@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 新加代码 -->
+	<!-- <classPathEntry location=""/> -->
+  <context id="context1">
+    <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/dblock" 
+    driverClass="com.mysql.jdbc.Driver" password="Bozpower123#" userId="root" />
+    <javaModelGenerator targetPackage="com.app.bzpower.entity" 
+    targetProject="bozpower/src/main/java" />
+    <sqlMapGenerator targetPackage="com.app.bzpower.mapper" 
+    targetProject="bozpower/src/main/java" />
+    <javaClientGenerator targetPackage="com.app.bzpower.dao" 
+    targetProject="bozpower/src/main/java" type="XMLMAPPER" />
+    
+   
+    <table schema="dblock" tableName="requestlog" domainObjectName="Requestlog">
+<!--       <columnOverride column="???" property="???" /> -->
+    </table>
+  </context>
+</generatorConfiguration>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.bzpower.dao.CompanyDao">
+	<resultMap type="com.app.bzpower.entity.Company"
+		id="companyMap">
+		<result column="id" property="id" />
+		<result column="companyName" property="companyName" />
+	</resultMap>
+	
+	<select id="selectCompanyByName" resultType="com.app.bzpower.entity.Company">
+		select * from company where companyName = #{companyName}
+	</select>
+	
+	<select id="selectCompany" parameterType="java.lang.Integer" resultType="com.app.bzpower.entity.Company">
+		select * from company
+		<if test="maxResult > 0">
+			limit #{page}, #{maxResult}
+		</if>
+	</select>
+	
+	<select id="selectCompanyById" parameterType="java.lang.Integer" resultType="com.app.bzpower.entity.Company">
+		select * from company where id = #{id}
+	</select>
+	
+	<select id="selectCompanyCount"  resultType="java.lang.Integer">
+		select count(*) as count from company
+	</select>
+	
+	
+
+	<insert id="insertCompany" parameterType="com.app.bzpower.entity.Company" >
+		insert into company( companyName) values (#{companyName})
+	</insert>
+
+	<update id="updateCompany" parameterType="com.app.bzpower.entity.Company">
+		update company set companyName = #{companyName} where id = #{id}
+	</update>
+	
+	<delete id="deleteCompanyByName" parameterType="java.lang.String">
+		delete from company where companyName = #{companyName}
+	</delete>
+
+
+<delete id="deleteCompanyById" parameterType="java.lang.Integer">
+		delete from company where id = #{id}
+	</delete>
+
+
+
+
+</mapper>

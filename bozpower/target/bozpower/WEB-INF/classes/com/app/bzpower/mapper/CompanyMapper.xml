@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.bzpower.dao.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.app.bzpower.entity.Company">
+    
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="companyName" jdbcType="VARCHAR" property="companyname" />
+    <result column="voltage" jdbcType="VARCHAR" property="voltage" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, companyName, voltage
+  </sql>
+  
+  <select id="selectByExample" parameterType="com.app.bzpower.entity.Company" resultMap="BaseResultMap">
+    select * from company 
+  </select>
+  
+  
+  <select id="selectCompanyByPrimaryKey" parameterType="com.app.bzpower.entity.Company" resultMap="BaseResultMap">
+    select id, companyName, voltage from company where id = #{id}
+  </select>
+  
+  
+  <select id="selectCompanyByPrimaryCompanyname" parameterType="com.app.bzpower.entity.Company" resultMap="BaseResultMap">
+    select id, companyName, voltage from company where companyName = #{companyname}
+  </select>
+  
+ <!--  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from company
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.app.bzpower.entity.Company">
+    delete from company 
+  </delete>
+  <insert id="insert" parameterType="com.app.bzpower.entity.Company">
+    insert into company (id, companyName, voltage
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, #{voltage,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.app.bzpower.entity.Company">
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyname != null">
+        companyName,
+      </if>
+      <if test="voltage != null">
+        voltage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null">
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null">
+        #{voltage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.app.bzpower.entity.Company" resultType="java.lang.Long">
+    select count(*) from company
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update company
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyname != null">
+        companyName = #{record.companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voltage != null">
+        voltage = #{record.voltage,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update company
+    set id = #{record.id,jdbcType=INTEGER},
+      companyName = #{record.companyname,jdbcType=VARCHAR},
+      voltage = #{record.voltage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.app.bzpower.entity.Company">
+    update company
+    <set>
+      <if test="companyname != null">
+        companyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null">
+        voltage = #{voltage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.app.bzpower.entity.Company">
+    update company
+    set companyName = #{companyname,jdbcType=VARCHAR},
+      voltage = #{voltage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update> -->
+</mapper>

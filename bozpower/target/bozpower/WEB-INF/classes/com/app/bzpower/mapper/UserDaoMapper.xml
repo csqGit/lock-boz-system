@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.bzpower.dao.UserDao">
+
+	<resultMap type="com.app.bzpower.entity.User"
+		id="userMap">
+		<result column="id" property="id" />
+		<result column="userName" property="userName" />
+		<result column="realName" property="realName" />
+		<result column="telephone" property="telephone" />
+		<result column="type" property="type" />
+		<result column="jobNumber" property="jobNumber" />
+		<result column="companyName" property="companyName" />
+	</resultMap>
+	
+	<select id="userLogin" parameterType="java.lang.String" resultType="com.app.bzpower.entity.User">
+		select * from user where userName = #{userName} and password = #{password}
+	</select>
+	
+	<select id="selectUserList" parameterType="java.lang.Integer" resultType="com.app.bzpower.entity.User">
+		select * from user 
+		<if test="maxResult > 0">
+			limit #{page}, #{maxResult}
+		</if>
+	</select>
+	<select id="selectUserById" parameterType="java.lang.Integer" resultType="com.app.bzpower.entity.User">
+		select * from user where id = #{id}
+	</select>
+	
+	<select id="selectUserByTelePhone" parameterType="java.lang.String" resultType="com.app.bzpower.entity.User">
+		select * from user where telephone = #{telephone}
+	</select>
+	
+	
+	<select id="selectUserByName" parameterType="java.lang.String" resultType="com.app.bzpower.entity.User">
+		select * from user where userName = #{userName}
+	</select>
+	
+	<select id="selectUserCount" resultType="java.lang.Integer" >
+		select count(*) as count from user
+	</select>
+	
+	<delete id="deleteUser" parameterType="java.lang.Integer">
+		delete from user where id = #{id}
+	</delete>
+	
+	<update id="updateUser">
+		update user 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="userName != null &amp;&amp; userName != ''">userName = #{userName},</if>
+			<if test="realName != null &amp;&amp; realName != ''">realName = #{realName},</if>
+			<if test="password != null &amp;&amp; password != ''">password = #{password},</if>
+			<if test="telephone != null &amp;&amp; telephone != ''">telephone = #{telephone},</if>
+			<if test="companyName != null &amp;&amp; companyName != ''">companyName = #{companyName},</if>
+			<if test="type > 0">type = #{type},</if>
+			<if test="jobNumber != null &amp;&amp; jobNumber != ''">jobNumber = #{jobNumber},</if>
+		</trim>
+		where id = #{id}
+	</update>
+
+	<insert id="insertUser" >
+		insert into user(userName, realName,  password, telephone, companyName,  type, jobNumber)
+					values ( #{userName},
+					#{realName},  #{password},#{telephone}, #{companyName},#{type},#{jobNumber})
+	</insert>
+
+</mapper>

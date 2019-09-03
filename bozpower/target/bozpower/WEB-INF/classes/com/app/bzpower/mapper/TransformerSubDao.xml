@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.bzpower.dao.TransformerSubDao">
+	<resultMap type="com.app.bzpower.entity.TransformerSub"
+		id="TransformerSubMap">
+		<result column="id" property="id" />
+		<result column="transformerSubName" property="transformerSubName" />
+	</resultMap>
+	
+
+	
+	<select id="selectTransformerSubList" resultType="com.app.bzpower.entity.TransformerSub">
+		select * from transformerSub
+	</select>
+	
+	<select id="selectTransfromerSubById" parameterType="java.lang.Integer" resultType="com.app.bzpower.entity.TransformerSub">
+		select * from transformerSub where id = #{id}
+	</select>
+	
+	
+
+	<insert id="insertTransformerSub" parameterType="com.app.bzpower.entity.TransformerSub" >
+		insert into transformerSub( transformerSubName) values (#{transformerSubName})
+	</insert>
+
+
+	<update id="updateTransformerSub" parameterType="com.app.bzpower.entity.TransformerSub">
+		update transformerSub set transformerSubName = #{transformerSubName} where id = #{id}
+	</update>
+	
+	<delete id="deleteTransformerSubById" parameterType="java.lang.String">
+		delete from transformerSub where id = #{id}
+	</delete>
+
+
+
+
+
+
+</mapper>
